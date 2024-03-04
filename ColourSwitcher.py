@@ -49,7 +49,7 @@ def replacecolour(imagePath, sourcecolour, targetcolour, outputPath, debugFile):
 
 if __name__ == "__main__":
     #Input directory containing images to modify
-    directory = input("Enter the directory path containing frames (press Enter for current directory): ")
+    directory = input("Enter the directory path containing images to modify (press Enter for current directory): ")
     if not directory:                                                                                           #If directory input is empty (user pressed Enter)
         directory = os.getcwd()                                                                                 #Set directory to current working directory
     

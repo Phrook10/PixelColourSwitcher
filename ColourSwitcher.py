@@ -17,7 +17,7 @@
 from PIL import Image
 import os
 
-def replacecolour(imagePath, sourcecolour, targetcolour, outputPath, debugFile):
+def replaceColour(imagePath, sourceColour, targetColour, outputPath, debugFile):
     try:
         #Open the image
         image = Image.open(imagePath)
@@ -31,13 +31,13 @@ def replacecolour(imagePath, sourcecolour, targetcolour, outputPath, debugFile):
         #Iterate over each pixel in the image
         for y in range(height):
             for x in range(width):
-                currentcolour = image.getpixel((x, y))                                                          #Get the current pixel colour
+                currentColour = image.getpixel((x, y))                                                          #Get the current pixel colour
                 
                 #Check if the current pixel matches the source colour
-                if currentcolour[:3] == sourcecolour:
+                if currentColour[:3] == sourceColour:
                     
                     #Replace the current pixel with the target colour
-                    newcolour = targetcolour + (currentcolour[3],)                                              #Preserve the alpha channel
+                    newcolour = targetColour + (currentColour[3],)                                              #Preserve the alpha channel
                     image.putpixel((x, y), newcolour)
                     debugFile.write(f"Replaced colour at pixel ({x}, {y}) with: {newcolour}\n")                 #Write debug info to file
         
@@ -49,13 +49,13 @@ def replacecolour(imagePath, sourcecolour, targetcolour, outputPath, debugFile):
 
 if __name__ == "__main__":
     #Input directory containing images to modify
-    directory = input("Enter the directory path containing images to modify (press Enter for current directory): ")
+    directory = input("Enter the directory path containing frames (press Enter for current directory): ")
     if not directory:                                                                                           #If directory input is empty (user pressed Enter)
         directory = os.getcwd()                                                                                 #Set directory to current working directory
     
     #Input source and target colours in RGB format
-    sourcecolour = tuple(int(x) for x in input("Enter the source colour (RGB format, e.g., 255 0 0): ").split())
-    targetcolour = tuple(int(x) for x in input("Enter the corresponding target colour (RGB format, e.g., 0 255 0): ").split())
+    sourceColour = tuple(int(x) for x in input("Enter the source colour (RGB format, e.g., 255 0 0): ").split())
+    targetColour = tuple(int(x) for x in input("Enter the corresponding target colour (RGB format, e.g., 0 255 0): ").split())
     
     #Open debug file for writing
     debugFilePath = os.path.join(directory, "debugOutput.txt")
@@ -68,7 +68,7 @@ if __name__ == "__main__":
                 outputImagePath = os.path.join(directory, "modified_" + filename)                               #Full path of the output image
                 
                 # Replace colour in the image
-                success = replacecolour(inputImagePath, sourcecolour, targetcolour, outputImagePath, debugFile)
+                success = replaceColour(inputImagePath, sourceColour, targetColour, outputImagePath, debugFile)
                 if success:
                     print(f"Processed: {inputImagePath} -> {outputImagePath}")
                 else:
